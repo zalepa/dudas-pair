@@ -1,0 +1,17 @@
+# Pair XML Pairser
+
+`pair-parse.rb` is the main file. `convert_tags.rb`, `tags.txt`, and `schema.xsd` was just a quick script to create a mapping of XML elements in camel case to underscore case (with some adjustments since some tags were lengthy).
+
+## Operation
+
+    FILE = '00000000.xml'
+    pair_data = Dudas::PAIR::XML.new ( File.read FILE ) # => returns a Hash corresponding to the XML
+
+## TODO:
+Will be adding convenience methods so you can just do this:
+
+    pair_data.organization # => yields nicely formatted Hash of attorney of record
+    pair_data.attorneys # => yields nicely formatted Array of attorney objects/Hashes
+
+## Note
+Note that no example XML files are included due to confidentiality issues. Additionally, you have to have a PAIR account (with that ridiculous Java certificate). Thus, this code isn't really useful to 99% of people (Google's PAIR data is TSV formatted and is much easier to deal with but is perpetually out of date, usually by years).

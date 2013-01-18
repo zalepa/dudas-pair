@@ -1,0 +1,1518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Diane Le (US Patent and Trademark Office) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pair="urn:us:gov:uspto:pair" targetNamespace="urn:us:gov:uspto:pair" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="PatentApplicationData">
+		<xs:annotation>
+			<xs:documentation>Root element. List of elements describing patent application data</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:FileHeader"/>
+				<xs:element ref="pair:CorrespondenceInfo"/>
+				<xs:element ref="pair:Attorneys" minOccurs="0"/>
+				<xs:element ref="pair:ApplicationBibliographicData"/>
+				<xs:element ref="pair:Inventors" minOccurs="0"/>
+				<xs:element ref="pair:Continuity" minOccurs="0"/>
+				<xs:element ref="pair:FileContentHistories" minOccurs="0"/>
+				<xs:element ref="pair:ForeignPriorities" minOccurs="0"/>
+				<xs:element ref="pair:ImageFileWrapperList" minOccurs="0"/>
+				<xs:element ref="pair:SupplementalContents" minOccurs="0"/>
+				<xs:element ref="pair:WIPOPublications" minOccurs="0"/>
+				<xs:element ref="pair:FirstActionPrediction" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FileHeader">
+		<xs:annotation>
+			<xs:documentation>Element containing the time and date this file was created</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:FileCreationTimeStamp"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PublicViewingIndicator" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>Boolean indicator showing whether the application is available for public viewing, "true" or "false"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FirstActionPrediction">
+		<xs:annotation>
+			<xs:documentation>Prediction of time-to-first-action after application reaches Status Code 30</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:PredictionTimePeriod" minOccurs="0"/>
+				<xs:element ref="pair:GroupArtUnit" minOccurs="0"/>
+				<xs:element ref="pair:ApplicationStatusCode" minOccurs="0"/>
+				<xs:element ref="pair:StatusDescription" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TelephoneNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Registered attorney telephone number using a 12 character string, i.e. "703-412-6457"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SupplementalContents">
+		<xs:annotation>
+			<xs:documentation>List of Supplemental Content document types associated with this application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:SupplementalContent" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SupplementalContent">
+		<xs:annotation>
+			<xs:documentation>Supplemental Content document type and number count</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:SupplementalContentCategory">
+					<xs:annotation>
+						<xs:documentation>String containing a description of the Supplemental Content file type, "Sequence Listings", "Megatables", "Search Results", Computer Program Listings (CPL)", or "Other"</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="pair:SupplementalContentQuantity"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SupplementalContentCategory">
+		<xs:annotation>
+			<xs:documentation>String containing a description of the Supplemental Content file type, "Sequence Listings", "Megatables", "Search Results", Computer Program Listings (CPL)", or "Other"</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Sequence Listings"/>
+				<xs:enumeration value="Megatables"/>
+				<xs:enumeration value="Search Results"/>
+				<xs:enumeration value="Computer Program Listings"/>
+				<xs:enumeration value="Other Supplemental Content Items"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="ApplicationStatusCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String with up to 3 digits, i.e. "150" that represent the current application status</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ScoreFileCategory">
+		<xs:annotation>
+			<xs:documentation>String containing a description of the Supplemental Content file type, "Sequence Listings", "Megatables", "Search Results", Computer Program Listings (CPL)", or "Other"</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Sequence Listings"/>
+				<xs:enumeration value="MegaTables"/>
+				<xs:enumeration value="Search Results"/>
+				<xs:enumeration value="Computer Program Listings (CPL)"/>
+				<xs:enumeration value="Other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="SupplementalContentQuantity" type="xs:nonNegativeInteger">
+		<xs:annotation>
+			<xs:documentation>A short integer representing the number of each file type in the Supplemental Content repository</xs:documentation>
+			<xs:documentation>The value of '0' or a positive integer is required for each Supplemental Content file type</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RegistrationNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Practitioner registration number consisting of a 5 character string, i.e. "32884"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EarliestPublicationYear" type="xs:gYear">
+		<xs:annotation>
+			<xs:documentation>U.S. Pre-Grant publication year</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PublicationSequenceNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>U.S. Pre-Grant publication sequence number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PublicationKindCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>U.S. Pre-Grant publication 2 digit Kind Code, i.e. "A1"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PublicationDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>U.S. Pre-Grant publication date as a string value, i.e. "1967-03-03"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ForeignPriorityDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>Foreign Priority date stored as a string, i.e. "YYYY-MM-DD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ForeignPriorityNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Foreign Priority patent number stored as a string, i.e. "2000-042831"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PostalCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String value containing a postal address code i.e. "92614"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PatentSubclass" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Up to a 6 digit integer, i.e. "17130". Subclass values are formatted with a period placed after the third character from the left as XXX.XXX.  Subclass values are displayed with all trailing zeros truncated (i.e. Class/Subclass for 678/006.000 should be displayed as 678/006)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PatentClass" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A string displayed as a 3 digit integer for the Patent Class concatenated with the Subclass value formatted as 'CLASS/SUBCLASS'</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ParentContinuityList">
+		<xs:annotation>
+			<xs:documentation>Group of elements decribing a parent application to this application claims priority</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ParentContinuity" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ParentContinuity" type="pair:ContinuityType">
+		<xs:annotation>
+			<xs:documentation>Group of data elements which describe a Parent Continuity claim</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplicationStatusText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A string describing application status, i.e. "APPLICATION DISPATCHED FROM OIPE"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplicationStatusDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>A string describing the application status date, i.e. "YYYY-MM-DD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplicationBibliographicData">
+		<xs:annotation>
+			<xs:documentation>Group of patent application bibliographic data elements</xs:documentation>
+		</xs:annotation>
+		<!-- For the Examiner assigned to this application-->
+		<!-- For the Examiner -->
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ApplicationNumber"/>
+				<xs:element ref="pair:ApplicationStatusCode" minOccurs="0"/>
+				<xs:element ref="pair:ApplicationStatusText" minOccurs="0"/>
+				<xs:element ref="pair:ApplicationStatusDate" minOccurs="0"/>
+				<xs:element ref="pair:PublicViewingIndicator"/>
+				<xs:element ref="pair:EarliestPublicationYear" minOccurs="0"/>
+				<xs:element ref="pair:PublicationDate" minOccurs="0"/>
+				<xs:element ref="pair:PublicationKindCode" minOccurs="0"/>
+				<xs:element ref="pair:PublicationSequenceNumber" minOccurs="0"/>
+				<xs:element ref="pair:AttorneyDocketNumber" minOccurs="0"/>
+				<xs:element ref="pair:ConfirmationNumber" minOccurs="0"/>
+				<xs:element ref="pair:CustomerNumber" minOccurs="0"/>
+				<xs:element ref="pair:FilingDate" minOccurs="0"/>
+				<xs:element ref="pair:Section371Sub102eDate" minOccurs="0"/>
+				<xs:element ref="pair:ApplicationStorageFormat"/>
+				<xs:element ref="pair:ExaminerName" minOccurs="0"/>
+				<xs:element ref="pair:GroupArtUnit" minOccurs="0"/>
+				<xs:element ref="pair:InventionSubjectMatterType"/>
+				<xs:element ref="pair:InventionTitle"/>
+				<xs:element ref="pair:FileWrapperLocationChangeDate" minOccurs="0"/>
+				<xs:element ref="pair:FileWrapperLocationCode" minOccurs="0"/>
+				<xs:element ref="pair:PatentClass" minOccurs="0"/>
+				<xs:element ref="pair:PatentSubclass" minOccurs="0"/>
+				<xs:element ref="pair:PatentNumber" minOccurs="0"/>
+				<xs:element ref="pair:IssueDate" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BeginPageNumber" type="xs:positiveInteger">
+		<xs:annotation>
+			<xs:documentation>Document page starting number, a required value for each document listed in the IFW dossier</xs:documentation>
+			<xs:documentation>Up to a 4 digit integer, i.e. "9999"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PageQuantity" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Document page count, a required value for each document listed in the IFW dossier</xs:documentation>
+			<xs:documentation>Up to a 4 digit integer, i.e. "9999"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PageOffsetQuantity" type="xs:positiveInteger">
+		<xs:annotation>
+			<xs:documentation>Document page offset, a required value for each document listed in the IFW dossier.</xs:documentation>
+			<xs:documentation>Up to a 4 digit integer, i.e. "9999"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MailRoomDate" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String "YYYY-MM-DD" containing the official date of outgoing correspondence sent to the applicant</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileWrapperLocationChangeDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>String "YYYY-MM-DD" containing the date of the last file location change</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileWrapperLocationCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing the file wrapper location, i.e. "FILE REPOSITORY (FRANCONIA)"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileWrapperDocumentCode" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing the Image File Wrapper document code</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ImageFileWrapperList">
+		<xs:annotation>
+			<xs:documentation>List of documents for this application stored in the Image File Wrapper (IFW)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ImageFileWrapperDocument" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ImageFileWrapperDocument">
+		<xs:annotation>
+			<xs:documentation>Individual document elements strored in the Image File Wrapper (IFW)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:DocumentCategory"/>
+				<xs:element ref="pair:DocumentDescription"/>
+				<xs:element ref="pair:FileWrapperDocumentCode"/>
+				<xs:element ref="pair:MailRoomDate" minOccurs="0"/>
+				<xs:element ref="pair:PageQuantity" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IssueDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>A string formated as "YYYY-MM-DD" i.e. "1967-03-03"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Inventors">
+		<xs:annotation>
+			<xs:documentation>List of Inventors associated with this application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:Inventor" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Inventor">
+		<xs:annotation>
+			<xs:documentation>Inventor name and address elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:InventorName"/>
+				<xs:element ref="pair:InventorAddress"/>
+				<xs:element ref="pair:InventorContact" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InventorName" type="pair:PersonNameType"/>
+	<xs:element name="InventorAddress" type="pair:AddressType"/>
+	<xs:element name="InventorContact" type="pair:ContactType"/>
+	<xs:element name="InventionTitle" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing the Title of Invention, i.e. "ANCHORED ANULUS METHOD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="InventionSubjectMatterType" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing the invention subject matter type, i.e. "UTL"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GroupArtUnit" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A 4 character string, i.e. "3738" for the Group Art Unit (GAU) number</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ForeignPriorities">
+		<xs:annotation>
+			<xs:documentation>List of all foreign priority claims for this application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ForeignPriority" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ForeignPriority">
+		<xs:annotation>
+			<xs:documentation>Group of elements describing a foreign priority reference</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:Country"/>
+				<xs:element ref="pair:ForeignPriorityNumber"/>
+				<xs:element ref="pair:ForeignPriorityDate" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PredictionTimePeriod" type="xs:positiveInteger">
+		<xs:annotation>
+			<xs:documentation>An optional string value containing as estimate for the number of months to the Examiners first action</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileCreationTimeStamp" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>File creation date and time String, i.e. "2007-05-15T13:49:00.0"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FileContentHistories">
+		<xs:annotation>
+			<xs:documentation>List containing all file history transactions</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:FileContentHistory" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="FileContentHistory">
+		<xs:annotation>
+			<xs:documentation>Group of elements describing a file history transaction</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:TransactionDate"/>
+				<xs:element ref="pair:TransactionDescription"/>
+				<xs:element ref="pair:StatusNumber" minOccurs="0"/>
+				<xs:element ref="pair:StatusDescription" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransactionDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>FilGAUe history transaction date like "1994-01-12"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="TransactionDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing a file history transaction i.e., "Issue Fee Payment Verified"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StatusNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>An optional 3 character string, i.e. '150' describing past status codes associated with a file content history record</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="StatusDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A string containing a description of current and past status changes associated with a file content history record</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocumentDescription" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing the IFW document description, i.e. "Internal Response to Printer Query from TC"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="DocumentCategory" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing the IFW document category, i.e. "PROSECUTION"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CustomerNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A 5 character string, i.e. "20995" or "L0095"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CorrespondenceInfo">
+		<xs:annotation>
+			<xs:documentation>Customer contact information consisting of Correspondence and Email addresses</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PersonName" type="pair:PersonNameType" minOccurs="0"/>
+				<xs:element name="OrganizationName" type="pair:OrganizationNameType" minOccurs="0"/>
+				<xs:element ref="pair:CorrespondenceAddress"/>
+				<xs:element ref="pair:CorrespondenceContact" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CorrespondenceAddress" type="pair:AddressType">
+		<xs:annotation>
+			<xs:documentation>Customer Correspondence address elements</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CorrespondenceContact" type="pair:ContactType"/>
+	<xs:element name="Continuity">
+		<xs:annotation>
+			<xs:documentation>List of parent and child Continuity references</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ParentContinuityList" minOccurs="0"/>
+				<xs:element ref="pair:ChildContinuityList" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ConfirmationNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A 4 digit character string, i.e. "3390"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ChildContinuityList">
+		<xs:annotation>
+			<xs:documentation>List of applications which claim priority to this application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:ChildContinuity" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ChildContinuity" type="pair:ContinuityType">
+		<xs:annotation>
+			<xs:documentation>Group of elements decribing a child application which claims priority to this application</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Attorneys">
+		<xs:annotation>
+			<xs:documentation>List of registered practitioners associated with this application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:Attorney" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Attorney">
+		<xs:annotation>
+			<xs:documentation>List of elements containing a practitioner name, registration and telephone number</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:RegistrationNumber"/>
+				<xs:element ref="pair:AttorneyName"/>
+				<xs:element ref="pair:AttorneyContact" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttorneyDocketNumber">
+		<xs:annotation>
+			<xs:documentation>Attorney Docket Number is stored as a user defined 25 character string</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AttorneyContact" type="pair:ContactType"/>
+	<xs:element name="ApplicationStorageFormat">
+		<xs:annotation>
+			<xs:documentation>IFW file content indicator, "ELE" for all file wrapper document images, and "FWM" for a partial list of document images</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="ELE"/>
+				<xs:enumeration value="FWM"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="AttorneyName" type="pair:PersonNameType"/>
+	<xs:element name="ExaminerName" type="pair:PersonNameType"/>
+	<xs:element name="WIPOPublications">
+		<xs:annotation>
+			<xs:documentation>World Intellectual Property Organazation published International Application</xs:documentation>
+			<xs:documentation>?????????List of WIPO publication data elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:WIPOPublication" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>List of WIPO publication data elements</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="WIPOPublicationNumber">
+		<xs:annotation>
+			<xs:documentation>WIPO publication number using an 8 digit integer, i.e. "200001603"</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:positiveInteger"/>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="WIPOPublicationDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>WIPO publication date, i.e. "2000-01-13"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="WIPOPublication">
+		<xs:annotation>
+			<xs:documentation>?????????List of WIPO publication data elements</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pair:PCTApplicationNumber"/>
+				<xs:element ref="pair:PCTFilingDate" minOccurs="0"/>
+				<xs:element ref="pair:WIPOPublicationNumber"/>
+				<xs:element ref="pair:WIPOPublicationDate"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PCTFilingDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>International application filing date, i.e. "YYYY-MM-DD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PCTApplicationNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>International application number containing a 17 character "PCT/US1999/014989" or 14 character "PCT/US99/14989" string</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RelationType">
+		<xs:sequence>
+			<xs:element ref="pair:ParentDocument"/>
+			<xs:element ref="pair:ChildDocument"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RelatedPublication">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UtilityModelBasis" type="pair:RelationType"/>
+	<xs:element name="ChildDocument" type="pair:ContinuityType"/>
+	<xs:element name="ParentDocument" type="pair:ContinuityType"/>
+	<!--*****************-->
+	<xs:complexType name="ContinuityType">
+		<xs:sequence>
+			<xs:element ref="pair:ApplicationNumber"/>
+			<xs:element ref="pair:ApplicationCategory" minOccurs="0"/>
+			<xs:element ref="pair:FilingDate" minOccurs="0"/>
+			<xs:element ref="pair:PatentNumber" minOccurs="0"/>
+			<xs:element ref="pair:Section371Sub102eDate" minOccurs="0"/>
+			<xs:element ref="pair:ContinuityStatus" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ApplicationNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Application numbers with 8 digits are from the PALM database table and formatted as 99/999,999. If the application number is 7 digits long, the system adds a leading zero and displays the value as 09/999,999</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ApplicationCategory">
+		<xs:annotation>
+			<xs:documentation>A formatted string with one of the following values: ?PROVSNL?, ?REEXAM?, ?REISSUE?, ?PCT?, or ?REGULAR?</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="PROVSNL"/>
+				<xs:enumeration value="REEXAM"/>
+				<xs:enumeration value="REISSUE"/>
+				<xs:enumeration value="PCT"/>
+				<xs:enumeration value="REGULAR"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="PatentNumber" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>U.S. issued patent number as a 7 character string i.e. "6123456"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FilingDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>A string value formatted as "YYYY-MM-DD" a date similar to "2003-05-21"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Section371Sub102eDate" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>String containing the 371 filing date, i.e. "YYYY-MM-DD"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ContinuityStatus" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing a description of the parent or child Continuity Status, i.e., "Patented", "Pending", "Abandoned"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--*****************-->
+	<xs:complexType name="AddressType">
+		<xs:sequence>
+			<xs:sequence>
+				<xs:element ref="pair:AddressLine" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="pair:City" minOccurs="0"/>
+				<xs:element ref="pair:GeographicRegion" minOccurs="0"/>
+				<xs:element ref="pair:PostalCode" minOccurs="0"/>
+			</xs:sequence>
+			<xs:element ref="pair:Country" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="languageCode" type="pair:ISOLanguageCodeType" default="en"/>
+	</xs:complexType>
+	<xs:element name="AddressLine">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="sequenceNumber" type="xs:positiveInteger"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="City" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing a city name, i.e. "IRVINE"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--*****************-->
+	<xs:element name="GeographicRegion" type="pair:GeographicRegionType"/>
+	<xs:complexType name="GeographicRegionType">
+		<xs:sequence>
+			<xs:element ref="pair:GeographicRegionCode" minOccurs="0"/>
+			<xs:element ref="pair:GeographicRegionName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GeographicRegionName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>A string containing a geographic region name, i.e. "Rome"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GeographicRegionCode">
+		<xs:annotation>
+			<xs:documentation>A 2 character string for a geographic region, i.e. "MA" for Massachussetts</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string"/>
+		</xs:simpleType>
+	</xs:element>
+	<!--******************-->
+	<xs:element name="Country" type="pair:CountryType"/>
+	<xs:complexType name="CountryType">
+		<xs:sequence>
+			<xs:element ref="pair:CountryCode"/>
+			<xs:element ref="pair:CountryName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CountryName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing the country name such as "United States", "Japan", "Austrialia"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CountryCode">
+		<xs:annotation>
+			<xs:documentation>Two letter country code such as "US" for United States, "JP" for Japan</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--*******************-->
+	<xs:complexType name="OrganizationNameType">
+		<xs:sequence>
+			<xs:element ref="pair:OrganizationFullName"/>
+			<xs:element ref="pair:OrganizationShortName" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="OrganizationFullName" type="xs:string"/>
+	<xs:element name="OrganizationShortName" type="xs:string"/>
+	<!--******************-->
+	<xs:complexType name="PersonNameType">
+		<xs:choice>
+			<xs:element ref="pair:FullName">
+				<xs:annotation>
+					<xs:documentation>Freeform string describing Full Personal name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:sequence>
+				<xs:element ref="pair:Prefix" minOccurs="0"/>
+				<xs:element ref="pair:FirstName"/>
+				<xs:element ref="pair:PreferredFirstName" minOccurs="0"/>
+				<xs:element ref="pair:MiddleName" minOccurs="0"/>
+				<xs:element ref="pair:LastName"/>
+				<xs:element ref="pair:SecondLastName" minOccurs="0"/>
+				<xs:element ref="pair:Suffix" minOccurs="0"/>
+				<xs:element ref="pair:Initials" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="FullName">
+		<xs:annotation>
+			<xs:documentation>Freeform string describing Full Personal name</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string"/>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Suffix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing an individuals name suffix, i.e. "Jr", or "Esq"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="FirstName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing an individuals given name, i.e. "Carl"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="PreferredFirstName" type="xs:string"/>
+	<xs:element name="MiddleName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing an individual middle name, i.e. "J"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LastName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String describing an individuals faimily name, i.e. "Andres"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="SecondLastName" type="xs:string"/>
+	<xs:element name="Prefix" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>String containing an individuals name prefix, i.e. "Mr", "Mrs" or "Dr"</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Initials">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="[A-Z]+"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--*******************-->
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element ref="pair:Phone" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="pair:Fax" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="pair:EMail" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="pair:URL" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="pair:OtherContact" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="URL" type="xs:anyURI"/>
+	<xs:element name="EMail" type="xs:string"/>
+	<xs:element name="Fax" type="xs:string"/>
+	<xs:element name="Phone" type="pair:PhoneType"/>
+	<xs:complexType name="PhoneType" mixed="true">
+		<xs:sequence>
+			<xs:element name="Extension" type="xs:token" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="phoneKind" default="general">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="general"/>
+					<xs:enumeration value="work"/>
+					<xs:enumeration value="home"/>
+					<xs:enumeration value="cell"/>
+					<xs:enumeration value="tdd"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="OtherContact" type="xs:string"/>
+	<xs:simpleType name="ISOLanguageCodeType">
+		<xs:annotation>
+			<xs:documentation>ISO 639-1:2002 Part 1: Alpha-2 Language Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="aa">
+				<xs:annotation>
+					<xs:documentation>Afar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ab">
+				<xs:annotation>
+					<xs:documentation>Abkhazian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="af">
+				<xs:annotation>
+					<xs:documentation>Afrikaans</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="am">
+				<xs:annotation>
+					<xs:documentation>Amharic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ar">
+				<xs:annotation>
+					<xs:documentation>Arabic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="as">
+				<xs:annotation>
+					<xs:documentation>Assamese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ay">
+				<xs:annotation>
+					<xs:documentation>Aymara</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="az">
+				<xs:annotation>
+					<xs:documentation>Azerbaijani</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ba">
+				<xs:annotation>
+					<xs:documentation>Bashkir</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="be">
+				<xs:annotation>
+					<xs:documentation>Byelorussian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bg">
+				<xs:annotation>
+					<xs:documentation>Bulgarian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bh">
+				<xs:annotation>
+					<xs:documentation>Bihari</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bi">
+				<xs:annotation>
+					<xs:documentation>Bislama</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bn">
+				<xs:annotation>
+					<xs:documentation>Bengali; Bangla</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="bo">
+				<xs:annotation>
+					<xs:documentation>Tibetan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="br">
+				<xs:annotation>
+					<xs:documentation>Breton</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ca">
+				<xs:annotation>
+					<xs:documentation>Catalan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="co">
+				<xs:annotation>
+					<xs:documentation>Corsican</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="cs">
+				<xs:annotation>
+					<xs:documentation>Czech</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="cy">
+				<xs:annotation>
+					<xs:documentation>Welsh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="da">
+				<xs:annotation>
+					<xs:documentation>Danish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="de">
+				<xs:annotation>
+					<xs:documentation>German</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="dz">
+				<xs:annotation>
+					<xs:documentation>Bhutani</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="el">
+				<xs:annotation>
+					<xs:documentation>Greek</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="en">
+				<xs:annotation>
+					<xs:documentation>English</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="eo">
+				<xs:annotation>
+					<xs:documentation>Esperanto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="es">
+				<xs:annotation>
+					<xs:documentation>Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="et">
+				<xs:annotation>
+					<xs:documentation>Estonian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="eu">
+				<xs:annotation>
+					<xs:documentation>Basque</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fa">
+				<xs:annotation>
+					<xs:documentation>Persian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fi">
+				<xs:annotation>
+					<xs:documentation>Finnish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fj">
+				<xs:annotation>
+					<xs:documentation>Fiji</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fo">
+				<xs:annotation>
+					<xs:documentation>Faroese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fr">
+				<xs:annotation>
+					<xs:documentation>French</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="fy">
+				<xs:annotation>
+					<xs:documentation>Frisian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ga">
+				<xs:annotation>
+					<xs:documentation>Irish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gd">
+				<xs:annotation>
+					<xs:documentation>Scots Gaelic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gl">
+				<xs:annotation>
+					<xs:documentation>Galician</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gn">
+				<xs:annotation>
+					<xs:documentation>Guarani</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="gu">
+				<xs:annotation>
+					<xs:documentation>Gujarati</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ha">
+				<xs:annotation>
+					<xs:documentation>Hausa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="he">
+				<xs:annotation>
+					<xs:documentation>Hebrew</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="hi">
+				<xs:annotation>
+					<xs:documentation>Hindi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="hr">
+				<xs:annotation>
+					<xs:documentation>Croatian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="hu">
+				<xs:annotation>
+					<xs:documentation>Hungarian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="hy">
+				<xs:annotation>
+					<xs:documentation>Armenian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ia">
+				<xs:annotation>
+					<xs:documentation>Interlingua</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="id">
+				<xs:annotation>
+					<xs:documentation>Indonesian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ie">
+				<xs:annotation>
+					<xs:documentation>Interlingue</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ik">
+				<xs:annotation>
+					<xs:documentation>Inupiak</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="is">
+				<xs:annotation>
+					<xs:documentation>Icelandic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="it">
+				<xs:annotation>
+					<xs:documentation>Italian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="iu">
+				<xs:annotation>
+					<xs:documentation>Inuktitut</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ja">
+				<xs:annotation>
+					<xs:documentation>Japanese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="jw">
+				<xs:annotation>
+					<xs:documentation>Javanese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ka">
+				<xs:annotation>
+					<xs:documentation>Georgian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="kk">
+				<xs:annotation>
+					<xs:documentation>Kazakh</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="kl">
+				<xs:annotation>
+					<xs:documentation>Greenlandic</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="km">
+				<xs:annotation>
+					<xs:documentation>Cambodian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="kn">
+				<xs:annotation>
+					<xs:documentation>Kannada</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ko">
+				<xs:annotation>
+					<xs:documentation>Korean</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ks">
+				<xs:annotation>
+					<xs:documentation>Kashmiri</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ku">
+				<xs:annotation>
+					<xs:documentation>Kurdish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ky">
+				<xs:annotation>
+					<xs:documentation>Kirghiz</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="la">
+				<xs:annotation>
+					<xs:documentation>Latin</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ln">
+				<xs:annotation>
+					<xs:documentation>Lingala</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="lo">
+				<xs:annotation>
+					<xs:documentation>Laothian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="lt">
+				<xs:annotation>
+					<xs:documentation>Lithuanian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="lv">
+				<xs:annotation>
+					<xs:documentation>Latvian; Lettish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mg">
+				<xs:annotation>
+					<xs:documentation>Malagasy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mi">
+				<xs:annotation>
+					<xs:documentation>Maori</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mk">
+				<xs:annotation>
+					<xs:documentation>Macedonian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ml">
+				<xs:annotation>
+					<xs:documentation>Malayalam</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mn">
+				<xs:annotation>
+					<xs:documentation>Mongolian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mo">
+				<xs:annotation>
+					<xs:documentation>Moldavian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mr">
+				<xs:annotation>
+					<xs:documentation>Marathi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ms">
+				<xs:annotation>
+					<xs:documentation>Malay</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="mt">
+				<xs:annotation>
+					<xs:documentation>Maltese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="my">
+				<xs:annotation>
+					<xs:documentation>Burmese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="na">
+				<xs:annotation>
+					<xs:documentation>Nauru</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ne">
+				<xs:annotation>
+					<xs:documentation>Nepali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="nl">
+				<xs:annotation>
+					<xs:documentation>Dutch</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="no">
+				<xs:annotation>
+					<xs:documentation>Norwegian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="oc">
+				<xs:annotation>
+					<xs:documentation>Occitan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="om">
+				<xs:annotation>
+					<xs:documentation>(Afan) Oromo</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="or">
+				<xs:annotation>
+					<xs:documentation>Oriya</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="pa">
+				<xs:annotation>
+					<xs:documentation>Punjabi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="pl">
+				<xs:annotation>
+					<xs:documentation>Polish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ps">
+				<xs:annotation>
+					<xs:documentation>Pashto, Pushto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="pt">
+				<xs:annotation>
+					<xs:documentation>Portuguese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="qu">
+				<xs:annotation>
+					<xs:documentation>Quechua</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rm">
+				<xs:annotation>
+					<xs:documentation>Rhaeto-Romance</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rn">
+				<xs:annotation>
+					<xs:documentation>Kirundi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ro">
+				<xs:annotation>
+					<xs:documentation>Romanian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ru">
+				<xs:annotation>
+					<xs:documentation>Russian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="rw">
+				<xs:annotation>
+					<xs:documentation>Kinyarwanda</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sa">
+				<xs:annotation>
+					<xs:documentation>Sanskrit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sd">
+				<xs:annotation>
+					<xs:documentation>Sindhi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sg">
+				<xs:annotation>
+					<xs:documentation>Sangho</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sh">
+				<xs:annotation>
+					<xs:documentation>Serbo-Croatian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="si">
+				<xs:annotation>
+					<xs:documentation>Singhalese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sk">
+				<xs:annotation>
+					<xs:documentation>Slovak</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sl">
+				<xs:annotation>
+					<xs:documentation>Slovenian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sm">
+				<xs:annotation>
+					<xs:documentation>Samoan</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sn">
+				<xs:annotation>
+					<xs:documentation>Shona</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="so">
+				<xs:annotation>
+					<xs:documentation>Somali</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sq">
+				<xs:annotation>
+					<xs:documentation>Albanian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sr">
+				<xs:annotation>
+					<xs:documentation>Serbian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ss">
+				<xs:annotation>
+					<xs:documentation>Siswati</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="st">
+				<xs:annotation>
+					<xs:documentation>Sesotho</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="su">
+				<xs:annotation>
+					<xs:documentation>Sundanese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sv">
+				<xs:annotation>
+					<xs:documentation>Swedish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="sw">
+				<xs:annotation>
+					<xs:documentation>Swahili</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ta">
+				<xs:annotation>
+					<xs:documentation>Tamil</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="te">
+				<xs:annotation>
+					<xs:documentation>Telugu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tg">
+				<xs:annotation>
+					<xs:documentation>Tajik</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="th">
+				<xs:annotation>
+					<xs:documentation>Thai</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ti">
+				<xs:annotation>
+					<xs:documentation>Tigrinya</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tk">
+				<xs:annotation>
+					<xs:documentation>Turkmen</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tl">
+				<xs:annotation>
+					<xs:documentation>Tagalog</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tn">
+				<xs:annotation>
+					<xs:documentation>Setswana</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="to">
+				<xs:annotation>
+					<xs:documentation>Tonga</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tr">
+				<xs:annotation>
+					<xs:documentation>Turkish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ts">
+				<xs:annotation>
+					<xs:documentation>Tsonga</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tt">
+				<xs:annotation>
+					<xs:documentation>Tatar</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="tw">
+				<xs:annotation>
+					<xs:documentation>Twi</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ug">
+				<xs:annotation>
+					<xs:documentation>Uigur</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="uk">
+				<xs:annotation>
+					<xs:documentation>Ukrainian</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ur">
+				<xs:annotation>
+					<xs:documentation>Urdu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="uz">
+				<xs:annotation>
+					<xs:documentation>Uzbek</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="vi">
+				<xs:annotation>
+					<xs:documentation>Vietnamese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="vo">
+				<xs:annotation>
+					<xs:documentation>Volapuk</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="wo">
+				<xs:annotation>
+					<xs:documentation>Wolof</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="xh">
+				<xs:annotation>
+					<xs:documentation>Xhosa</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="yi">
+				<xs:annotation>
+					<xs:documentation>Yiddish</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="yo">
+				<xs:annotation>
+					<xs:documentation>Yoruba</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="za">
+				<xs:annotation>
+					<xs:documentation>Zhuang</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="zh">
+				<xs:annotation>
+					<xs:documentation>Chinese</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="zu">
+				<xs:annotation>
+					<xs:documentation>Zulu</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
