@@ -1,4 +1,4 @@
-# Pair XML Pairser
+# Pair XML Parser
 
 `pair-parse.rb` is the main file. `convert_tags.rb`, `tags.txt`, and `schema.xsd` was just a quick script to create a mapping of XML elements in camel case to underscore case (with some adjustments since some tags were lengthy).
 
