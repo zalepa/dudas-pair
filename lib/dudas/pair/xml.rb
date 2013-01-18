@@ -1,8 +1,8 @@
 module Dudas
-  
+
   module PAIR
 
-	  class XML
+    class XML
 
       attr_reader :hash
 
@@ -136,22 +136,22 @@ module Dudas
         'ISOLanguageCodeType' => 'iso_language_code_type'
       }
 
-  		def initialize(xml_string)
-  			@hash = Crack::XML.parse(clean(xml_string))
-  		end
+      def initialize(xml_string)
+        @hash = Crack::XML.parse(clean(xml_string))
+      end
 
 
       private
 
-      def clean(xml_string)
-        cleaned = xml_string.gsub('<pair:', '<').gsub('</pair:', '</')
-        MAPPING.each do |o, n|
-          cleaned = cleaned.gsub(/<#{o}/, "<#{n}").gsub(/<\/#{o}/, "</#{n}")
+        def clean(xml_string)
+          cleaned = xml_string.gsub('<pair:', '<').gsub('</pair:', '</')
+          MAPPING.each do |o, n|
+            cleaned = cleaned.gsub(/<#{o}/, "<#{n}").gsub(/<\/#{o}/, "</#{n}")
+          end
+          cleaned
         end
-        cleaned
-      end
 
-  	end
+    end
   end
 
 end
