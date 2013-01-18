@@ -1,8 +1,6 @@
-require 'crack'
 require_relative '../lib/dudas/pair/xml'
-require 'pp'
 
 FILE = '../examples/00000000.xml'
 pair_data = Dudas::PAIR::XML.new ( File.read FILE )
 
-pp pair_data.hash
+puts pair_data.to_json

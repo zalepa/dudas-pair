@@ -8,7 +8,7 @@
     pair_data = Dudas::PAIR::XML.new ( File.read FILE ) # => returns a Hash corresponding to the XML
 
 ## TODO:
-Will be adding convenience methods so you can just do this:
+1. Will be adding convenience methods so you can just do this:
 
     pair_data.organization # => yields nicely formatted Hash of attorney of record
     pair_data.attorneys # => yields nicely formatted Array of attorney objects/Hashes

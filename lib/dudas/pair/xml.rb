@@ -1,3 +1,6 @@
+require 'crack'
+require 'json'
+
 module Dudas
 
   module PAIR
@@ -146,6 +149,10 @@ module Dudas
 
       def initialize(xml_string)
         @hash = Crack::XML.parse(clean(xml_string))
+      end
+      
+      def to_json
+        @hash.to_json
       end
 
 
