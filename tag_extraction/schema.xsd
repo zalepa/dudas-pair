@@ -22,6 +22,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	
 	<xs:element name="FileHeader">
 		<xs:annotation>
 			<xs:documentation>Element containing the time and date this file was created</xs:documentation>
@@ -32,6 +33,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	
 	<xs:element name="PublicViewingIndicator" type="xs:boolean">
 		<xs:annotation>
 			<xs:documentation>Boolean indicator showing whether the application is available for public viewing, "true" or "false"</xs:documentation>

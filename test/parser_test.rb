@@ -1,4 +1,5 @@
-require_relative '../lib/dudas'
+require 'crack'
+require_relative '../lib/dudas/pair/xml'
 require 'pp'
 
 FILE = '../examples/00000000.xml'
